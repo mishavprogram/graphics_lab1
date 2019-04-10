@@ -7,21 +7,21 @@ import java.io.File;
 import java.io.IOException;
 
 public class Main {
+
+    public static final String ORIGINAL = "src/pictures/chan.jpg";
+    public static final String MINIMAL_SIZE = "src/pictures/minimal_size.jpg";
+    public static final String TEST_BLACK_PICTURE = "src/pictures/TEST_BLACK_PICTURE.jpg";
+    public static final String NEAREST = "src/pictures/nearest.jpg";
+    public static final String BILINEAR = "src/pictures/bilinear.jpg";
+
     public static void main(String[] args) throws IOException {
         BufferedImage image = null;
-        image = ImageIO.read(new File("src/chan.jpg"));
+        image = ImageIO.read(new File(ORIGINAL));
+
         int scale = 20;
         int scaledWidth = image.getWidth()/scale;
         System.out.println(scaledWidth);
         int scaledHeight = image.getHeight()/scale;
-//        BufferedImage scaled = new BufferedImage(scaledWidth, scaledHeight,
-//                BufferedImage.TYPE_INT_RGB);
-
-        //Старый автоматический метод. лучше забыть о нём
-        /*
-        Graphics2D g = scaled.createGraphics();
-        g.drawImage(image, 0, 0, scaledWidth, scaledHeight, null);
-        g.dispose();*/
 
         //Уменьшаем картинку
         BufferedImage scaled = new BufferedImage(scaledWidth, scaledHeight, BufferedImage.TYPE_3BYTE_BGR);
@@ -39,16 +39,8 @@ public class Main {
             }
         }
 
-        ImageIO.write(scaled, "JPEG", new File("src/11.jpg"));
+        ImageIO.write(scaled, "JPEG", new File(MINIMAL_SIZE));
 
-//        BufferedImage img = new BufferedImage(2, 2, BufferedImage.TYPE_3BYTE_BGR);
-//        img.setRGB(0, 0,  new Color(100, 100, 100).getRGB());
-//        img.setRGB(0, 1,  new Color(255, 0, 0).getRGB());
-//        img.setRGB(1, 0,  new Color(0, 0, 255).getRGB());
-//        img.setRGB(1, 1,  new Color(0, 255, 0).getRGB());
-//
-//        ImageIO.write(img, "BMP", new File("src/img.jpg"));
-//
         //просто расставил пиксели в новой картинке
         BufferedImage newImg = new BufferedImage(scaledWidth * scale - (scale - 1), scaledHeight * scale - (scale - 1), BufferedImage.TYPE_3BYTE_BGR);
         for (int i = 0; i < scaled.getWidth(); i++) {
@@ -65,7 +57,7 @@ public class Main {
             }
         }
 
-        ImageIO.write(newImg, "BMP", new File("src/img1.jpg"));
+        ImageIO.write(newImg, "BMP", new File(TEST_BLACK_PICTURE));
 
         //nearest
         BufferedImage newImg2 = new BufferedImage(scaledWidth * scale - (scale - 1), scaledHeight * scale - (scale - 1), BufferedImage.TYPE_3BYTE_BGR);
@@ -124,7 +116,8 @@ public class Main {
             }
         }
 
-        ImageIO.write(newImg2, "BMP", new File("src/img2.jpg"));
+        ImageIO.write(newImg2, "BMP", new File(NEAREST));
+
 
 
         //bilinear
@@ -187,11 +180,7 @@ public class Main {
             }
         }
 
-
-
-
-
-        ImageIO.write(newImg3, "BMP", new File("src/img4.jpg"));
+        ImageIO.write(newImg3, "BMP", new File(BILINEAR));
 
     }
 }
