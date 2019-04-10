@@ -87,7 +87,7 @@ public class Main {
                     //System.out.println(i);
                     Color rightColor = new Color(newImg3.getRGB(i, j));
                     Color leftColor = new Color(newImg3.getRGB(i - scale, j));
-                    int part = 1;
+                    int part = 1;//part is incrising
                     for (int k = i - 1; k > i - scale; k--) {
 
                         int red = (rightColor.getRed() * (scale - part) + leftColor.getRed() * part)/scale;
