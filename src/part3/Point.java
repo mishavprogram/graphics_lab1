@@ -13,7 +13,7 @@ class Point {
         return new Point(x, y);
     }
 
-    static boolean existByPointA_and_borders_maxX_and_maxY(Point point, int MAX_X, int MAX_Y){
+    static boolean exist(Point point, int MAX_X, int MAX_Y){
         if (point.getX()>=0 && point.getX()<=MAX_X){
             if (point.getY()>=0 && point.getY()<=MAX_Y){
                 return true;

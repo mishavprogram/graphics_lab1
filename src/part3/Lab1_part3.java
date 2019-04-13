@@ -9,8 +9,13 @@ public class Lab1_part3 {
 
     public static void main(String[] args) {
 
+        log("start array");
+        StartPicture.printObjectsAsArray();
+
         //set first Mask
         Mask mask = Mask.createMaskOnlyWithA_FromPoint(Point.createPointFromXY(0, 0));
+
+        log(mask.toString());
 
         movingABC_onPicture_AndDoLogic(mask);
 
@@ -33,7 +38,7 @@ public class Lab1_part3 {
                     break action;
                 }
                 //current A
-                log(++n+" : "+mask.getA());
+                //log(++n+" : "+mask.getA());
             }
         }
     }

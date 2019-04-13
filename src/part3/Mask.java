@@ -18,36 +18,36 @@ class Mask {
     static Mask getNextMaskByUsingOldMask_and_StartPicture(Mask oldMask) throws EndOfPictureException {
         Point currentA = oldMask.getA();
 
-        if (currentA.getX() == StartPicture.startPictureArr.length - 1){
+        if (currentA.getX() == StartPicture.MAX_X){
             //move from left part of arr by 1 low
 
             currentA.setX(0);
             currentA.setY(currentA.getY()+1);
 
             if (currentA.getY() > StartPicture.MAX_Y) throw new EndOfPictureException();
-
-            return getNextMaskByUsingOldMask_and_StartPicture(Mask.createMaskOnlyWithA_FromPoint(currentA));
-        }else{
+        }else {
+            currentA = Point.createPointFromXY(currentA.getX()+1, currentA.getY());
+        }
             //move right
-            Point a = Point.createPointFromXY(currentA.getX() + 1, currentA.getY());
+            Point a = currentA;
 
-            Point b = currentA;
+            Point b = Point.createPointFromXY(currentA.getX()-1, currentA.getY());
 
-            Point c = Point.createPointFromXY(currentA.getX() + 1, currentA.getY() - 1);
+            Point c = Point.createPointFromXY(currentA.getX(), currentA.getY() - 1);
 
-            Mask nextMask = new Mask();
+            Mask nextMask = new Mask();//сюди потраплять лише існуючі точки
 
-            if (Point.existByPointA_and_borders_maxX_and_maxY(a, StartPicture.MAX_X, StartPicture.MAX_Y)){
+            if (Point.exist(a, StartPicture.MAX_X, StartPicture.MAX_Y)){
                 nextMask.setA(a);
             }
-            if (Point.existByPointA_and_borders_maxX_and_maxY(b, StartPicture.MAX_X, StartPicture.MAX_Y)){
+            if (Point.exist(b, StartPicture.MAX_X, StartPicture.MAX_Y)){
                 nextMask.setB(b);
             }
-            if (Point.existByPointA_and_borders_maxX_and_maxY(c, StartPicture.MAX_X, StartPicture.MAX_Y)){
+            if (Point.exist(c, StartPicture.MAX_X, StartPicture.MAX_Y)){
                 nextMask.setC(c);
             }
+            Lab1_part3.log(nextMask.toString());
             return nextMask;
-        }
     }
 
     public Point getA() {
@@ -72,5 +72,14 @@ class Mask {
 
     public void setC(Point c) {
         C = c;
+    }
+
+    @Override
+    public String toString() {
+        return "Mask{" +
+               "A=" + A +
+               ", B=" + B +
+               ", C=" + C +
+               '}';
     }
 }
