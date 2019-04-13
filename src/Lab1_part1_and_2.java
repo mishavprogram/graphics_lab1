@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Main {
+public class Lab1_part1_and_2 {
 
     public static final String ORIGINAL = "src/pictures/chan.jpg";
     public static final String MINIMAL_SIZE = "src/pictures/minimal_size.jpg";
@@ -16,7 +16,7 @@ public class Main {
         BufferedImage image = null;
         image = ImageIO.read(new File(ORIGINAL));
 
-        int scale = 20;
+        int scale = 10;
         int scaledWidth = image.getWidth()/scale;
         System.out.println(scaledWidth);
         int scaledHeight = image.getHeight()/scale;
