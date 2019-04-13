@@ -1,32 +1,30 @@
 package part3;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class Lab1_part3 {
 
-    private static int[][] arrOfObjects;
+    private static Objects objects = Objects.createObjectsArrAndInfo();
 
-    private int number = 1;
-
-    private Map<Integer,Integer> map = new HashMap<>();
+    static final boolean LOGGING = true;
 
     public static void main(String[] args) {
-
-        arrOfObjects = StartPicture.startPictureArr.clone();
-
-        clearArr(arrOfObjects);
 
         //set first Mask
         Mask mask = Mask.createMaskOnlyWithA_FromPoint(Point.createPointFromXY(0, 0));
 
+        movingABC_onPicture_AndDoLogic(mask);
+
+        objects.printObjectsAsArray();
+    }
+
+    private static void movingABC_onPicture_AndDoLogic(Mask mask) {
         int n = 0;
 
         action:
         for(int i = 0; i <= StartPicture.MAX_Y; i++){
             for (int j = 0; j <= StartPicture.MAX_X; j++){
                 //logic
-
+                objects.doLogic(mask);
                 //move of mask
                 try {
                     mask = Mask.getNextMaskByUsingOldMask_and_StartPicture(mask);
@@ -35,16 +33,14 @@ public class Lab1_part3 {
                     break action;
                 }
                 //current A
-                System.out.println(++n + " : "+ mask.getA());
+                log(++n+" : "+mask.getA());
             }
         }
     }
 
-    private static void clearArr(int[][] arr) {
-        for(int i = 0; i <= StartPicture.MAX_Y; i++){
-            for (int j = 0; j <= StartPicture.MAX_X; j++){
-                arr[i][j] = 0;
-            }
-        }
+    static void log(String str){
+        if (LOGGING)
+        System.out.println(str);
     }
+
 }

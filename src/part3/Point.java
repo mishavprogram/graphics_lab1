@@ -22,27 +22,27 @@ class Point {
         return false;
     }
 
-    public int getX() {
+    int getX() {
         return x;
     }
 
-    public void setX(int x) {
+    void setX(int x) {
         this.x = x;
     }
 
-    public int getY() {
+    int getY() {
         return y;
     }
 
-    public void setY(int y) {
+    void setY(int y) {
         this.y = y;
     }
 
     @Override
     public String toString() {
         return "part3.Point{" +
-               "x=" + x +
-               ", y=" + y +
+               "y=" + y +
+               ", x=" + x +
                '}';
     }
 }
