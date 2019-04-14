@@ -15,7 +15,7 @@ class Mask {
         return new Mask(point);
     }
 
-    static Mask getNextMaskByUsingOldMask_and_StartPicture(Mask oldMask) {
+    static Mask getNextMask(Mask oldMask) {
         Point currentA = oldMask.getA();
 
         if (currentA.getX() == StartPicture.MAX_X){
@@ -44,7 +44,7 @@ class Mask {
             if (Point.exist(c, StartPicture.MAX_X, StartPicture.MAX_Y)){
                 nextMask.setC(c);
             }
-            Lab1_part3.log(nextMask.toString());
+            CountObjectsOnBinaryArray.log(nextMask.toString());
             return nextMask;
     }
 

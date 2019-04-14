@@ -1,26 +1,20 @@
 package part3;
 
 
-public class Lab1_part3 {
+public class CountObjectsOnBinaryArray {
 
     private static Objects objects = Objects.createObjectsArrAndInfo();
 
     static final boolean LOGGING = false;
 
     public static void main(String[] args) {
-
-        log("start array");
-        //StartPicture.printObjectsAsArray();
-
         //set first Mask
         Mask mask = Mask.createMaskOnlyWithA_FromPoint(Point.createPointFromXY(0, 0));
-
         log(mask.toString());
 
         movingABC_onPicture_AndDoLogic(mask);
 
-        objects.printObjectsAsArray();
-
+        PictureArrays.printArray(objects.getArrOfObjects());
         objects.printASSO();
 
         System.out.println("number of objects : "+objects.getNumberOfObjects());
@@ -29,18 +23,19 @@ public class Lab1_part3 {
     private static void movingABC_onPicture_AndDoLogic(Mask mask) {
         int n = 0;
 
-        action:
         for(int i = 0; i <= StartPicture.MAX_Y; i++){
             for (int j = 0; j <= StartPicture.MAX_X; j++){
                 //logic
                 objects.doLogic(mask);
                 //move of mask
-                if (!(i==StartPicture.MAX_Y && j==StartPicture.MAX_X))
-                mask = Mask.getNextMaskByUsingOldMask_and_StartPicture(mask);
-                //current A
-                //log(++n+" : "+mask.getA());
+                if (notLastElementOfArray(i, j))
+                mask = Mask.getNextMask(mask);
             }
         }
+    }
+
+    private static boolean notLastElementOfArray(int i, int j) {
+        return !(i == StartPicture.MAX_Y && j == StartPicture.MAX_X);
     }
 
     static void log(String str){
