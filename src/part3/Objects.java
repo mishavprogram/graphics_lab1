@@ -39,14 +39,17 @@ class Objects {
     void doLogic(Mask mask) {
         if (!labeledA(mask)){
             //do nothing
+            Lab1_part3.log("1. A NOT labeled");
         }else if (labeledA(mask) && !labeledB(mask) && !labeledC(mask)){
-            incrementValueOnArrOfObject(mask.getA());
             number++;
             assoArr[number] = number;
+            arrOfObjects[mask.getA().getY()][mask.getA().getX()] = number;
+            Lab1_part3.log("2. A labeled");
         }else if (labeledB(mask) && labeledC(mask)){
             if (valueFromArrOfObjects(mask.getB())==valueFromArrOfObjects(mask.getC())){
                 //якщо значення однакові
                 setPointValueToOtherPointValue(mask.getA(), mask.getB());
+                Lab1_part3.log("3. ==");
             }else{
                 //якщо значення різні, то треба все-рівно якесь присвоїти для A, а потім
                 //знайти макс, і поміняти в макс значення на те що в min
@@ -54,16 +57,20 @@ class Objects {
                 if (valueFromArrOfObjects(mask.getB())>valueFromArrOfObjects(mask.getC())){
                     //тоді в асоц масиві для B поставити значення C
                     assoArr[valueFromArrOfObjects(mask.getB())] = valueFromArrOfObjects(mask.getC());
+                    Lab1_part3.log("3. B > C");
                 }else{
                     assoArr[valueFromArrOfObjects(mask.getC())] = valueFromArrOfObjects(mask.getB());
+                    Lab1_part3.log("3. C > B");
                 }
             }
         }else if (labeledB(mask) && !labeledC(mask)){
             setPointValueToOtherPointValue(mask.getA(), mask.getB());
+            Lab1_part3.log("4. B labeled");
         }else if (labeledC(mask) && !labeledB(mask)){
             setPointValueToOtherPointValue(mask.getA(), mask.getC());
         }else{
             Lab1_part3.log("not detected!!!");
+            Lab1_part3.log("5. C labeled");
         }
     }
 

@@ -4,8 +4,8 @@ class StartPicture {
 
     static final int[][] startPictureArr =
         {
-            {0,0,1,0},
-            {1,1,1,0}
+            {0,0,1,0,1},
+            {1,1,1,0,0}
         };
 
     static void printObjectsAsArray(){
