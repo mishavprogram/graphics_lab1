@@ -5,12 +5,12 @@ public class Lab1_part3 {
 
     private static Objects objects = Objects.createObjectsArrAndInfo();
 
-    static final boolean LOGGING = true;
+    static final boolean LOGGING = false;
 
     public static void main(String[] args) {
 
         log("start array");
-        StartPicture.printObjectsAsArray();
+        //StartPicture.printObjectsAsArray();
 
         //set first Mask
         Mask mask = Mask.createMaskOnlyWithA_FromPoint(Point.createPointFromXY(0, 0));
@@ -22,6 +22,8 @@ public class Lab1_part3 {
         objects.printObjectsAsArray();
 
         objects.printASSO();
+
+        System.out.println("number of objects : "+objects.getNumberOfObjects());
     }
 
     private static void movingABC_onPicture_AndDoLogic(Mask mask) {

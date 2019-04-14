@@ -21,13 +21,21 @@ class Objects {
         }
     }
 
+    public int getNumberOfObjects(){
+        int max = 0;
+        for (int i=1; i<getNumber(); i++){
+            if (getAssoArr()[i]>max)
+                max = getAssoArr()[i];
+        }
+        return max;
+    }
+
     private Objects() {
         this.setArrOfObjects(StartPicture.startPictureArr.clone());
         for(int i=0; i<arrOfObjects.length; i++){
             arrOfObjects[i] = StartPicture.startPictureArr[i].clone();
         }
         this.clearArr(getArrOfObjects());
-        printObjectsAsArray();
     }
 
     static Objects createObjectsArrAndInfo(){
@@ -117,8 +125,8 @@ class Objects {
     }
 
     void printObjectsAsArray(){
-        System.out.println("height = "+arrOfObjects.length);
-        System.out.println("width = "+arrOfObjects[0].length);
+        //System.out.println("height = "+arrOfObjects.length);
+        //System.out.println("width = "+arrOfObjects[0].length);
 
         for(int height=0; height<arrOfObjects.length; height++){
             for (int width=0; width<arrOfObjects[height].length; width++){
