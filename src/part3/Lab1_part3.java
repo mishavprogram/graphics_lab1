@@ -20,6 +20,8 @@ public class Lab1_part3 {
         movingABC_onPicture_AndDoLogic(mask);
 
         objects.printObjectsAsArray();
+
+        objects.printASSO();
     }
 
     private static void movingABC_onPicture_AndDoLogic(Mask mask) {

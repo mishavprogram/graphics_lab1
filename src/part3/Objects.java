@@ -7,6 +7,20 @@ class Objects {
 
     private int[] assoArr = new int[100];
 
+    public int[] getAssoArr() {
+        return assoArr;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void printASSO(){
+        for(int i=1; i<=getNumber(); i++){
+            System.out.println(i+" - "+getAssoArr()[i]);
+        }
+    }
+
     private Objects() {
         this.setArrOfObjects(StartPicture.startPictureArr.clone());
         for(int i=0; i<arrOfObjects.length; i++){
