@@ -23,7 +23,7 @@ class Objects {
 
     public int getNumberOfObjects(){
         int max = 0;
-        for (int i=1; i<getNumber(); i++){
+        for (int i=1; i<=getNumber(); i++){
             if (getAssoArr()[i]>max)
                 max = getAssoArr()[i];
         }
