@@ -31,12 +31,8 @@ public class Lab1_part3 {
                 //logic
                 objects.doLogic(mask);
                 //move of mask
-                try {
-                    mask = Mask.getNextMaskByUsingOldMask_and_StartPicture(mask);
-                } catch (EndOfPictureException e) {
-                    //end action
-                    break action;
-                }
+                if (!(i==StartPicture.MAX_Y && j==StartPicture.MAX_X))
+                mask = Mask.getNextMaskByUsingOldMask_and_StartPicture(mask);
                 //current A
                 //log(++n+" : "+mask.getA());
             }

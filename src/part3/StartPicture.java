@@ -1,14 +1,12 @@
 package part3;
 
 class StartPicture {
+
     static final int[][] startPictureArr =
         {
-            {0,1,1,0,0,0,0},
-            {1,0,1,0,0,0,0},
-            {0,0,0,1,0,0,0},
-            {0,0,1,0,0,0,0},
-            {0,0,0,0,0,0,0}
-            };
+            {0,0,1,0},
+            {1,1,1,0}
+        };
 
     static void printObjectsAsArray(){
         System.out.println("height = "+startPictureArr.length);

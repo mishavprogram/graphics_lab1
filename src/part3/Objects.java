@@ -1,14 +1,11 @@
 package part3;
 
-import java.util.HashMap;
-import java.util.Map;
-
 class Objects {
     private int[][] arrOfObjects;
 
     private int number = 0;
 
-    private Map<Integer,Integer> map = new HashMap<>();
+    private int[] assoArr = new int[100];
 
     private Objects() {
         this.setArrOfObjects(StartPicture.startPictureArr.clone());
@@ -39,53 +36,47 @@ class Objects {
         this.arrOfObjects = arrOfObjects;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    public Map<Integer, Integer> getMap() {
-        return map;
-    }
-
-    public void setMap(Map<Integer, Integer> map) {
-        this.map = map;
-    }
-
     void doLogic(Mask mask) {
         if (!labeledA(mask)){
             //do nothing
-            Lab1_part3.log("1");
-        }else if (labeledA(mask) && !labeledB(mask) && !labeledC(mask)) {//a==1, b==0, c==0
-            Lab1_part3.log("2");
-            Point p = mask.getA();
-            arrOfObjects[p.getY()][p.getX()] = ++number;
-        }else if (labeledA(mask) && !labeledB(mask) && labeledC(mask)) {
-            Lab1_part3.log("3");
-            Point a = mask.getA();
-            Point c = mask.getC();
-            //maybe inc?
-            arrOfObjects[a.getY()][a.getX()] = arrOfObjects[c.getY()][c.getX()];
-        }else if (labeledA(mask) && labeledB(mask) && !labeledC(mask)) {
-            Lab1_part3.log("4");
-            Point a = mask.getA();
-            Point b = mask.getB();
-            //maybe inc?
-            arrOfObjects[a.getY()][a.getX()] = arrOfObjects[b.getY()][b.getX()];
-        }else if (labeledB(mask) && labeledC(mask)) {
-            Lab1_part3.log("5");
-            Point a = mask.getA();
-            Point b = mask.getB();
-            Point c = mask.getC();
-
-            //arrOfObjects[c.getY()][c.getX()] = arrOfObjects[b.getY()][b.getX()];
-            arrOfObjects[a.getY()][a.getX()] = arrOfObjects[b.getY()][b.getX()];
+        }else if (labeledA(mask) && !labeledB(mask) && !labeledC(mask)){
+            incrementValueOnArrOfObject(mask.getA());
+            number++;
+            assoArr[number] = number;
+        }else if (labeledB(mask) && labeledC(mask)){
+            if (valueFromArrOfObjects(mask.getB())==valueFromArrOfObjects(mask.getC())){
+                //якщо значення однакові
+                setPointValueToOtherPointValue(mask.getA(), mask.getB());
+            }else{
+                //якщо значення різні, то треба все-рівно якесь присвоїти для A, а потім
+                //знайти макс, і поміняти в макс значення на те що в min
+                setPointValueToOtherPointValue(mask.getA(), mask.getB());
+                if (valueFromArrOfObjects(mask.getB())>valueFromArrOfObjects(mask.getC())){
+                    //тоді в асоц масиві для B поставити значення C
+                    assoArr[valueFromArrOfObjects(mask.getB())] = valueFromArrOfObjects(mask.getC());
+                }else{
+                    assoArr[valueFromArrOfObjects(mask.getC())] = valueFromArrOfObjects(mask.getB());
+                }
+            }
+        }else if (labeledB(mask) && !labeledC(mask)){
+            setPointValueToOtherPointValue(mask.getA(), mask.getB());
+        }else if (labeledC(mask) && !labeledB(mask)){
+            setPointValueToOtherPointValue(mask.getA(), mask.getC());
         }else{
-            Lab1_part3.log("not detected !");
+            Lab1_part3.log("not detected!!!");
         }
+    }
+
+    private void incrementValueOnArrOfObject(Point point){
+        arrOfObjects[point.getY()][point.getX()]++;
+    }
+
+    private void setPointValueToOtherPointValue(Point getter, Point source){
+        arrOfObjects[getter.getY()][getter.getX()] = arrOfObjects[source.getY()][source.getX()];
+    }
+
+    private int valueFromArrOfObjects(Point point){
+        return arrOfObjects[point.getY()][point.getX()];
     }
 
     private int valueFromPicture(Point point){
@@ -102,16 +93,6 @@ class Objects {
 
     private boolean labeledC(Mask mask){
         return (mask.getC()!=null && valueFromPicture(mask.getC())>0);
-    }
-
-    private boolean a_equals_0(Mask mask){
-        Point a = mask.getA();
-
-        if (valueFromPicture(a) == 0){
-            Lab1_part3.log("position 1");
-            return true;
-        }
-        return false;
     }
 
     void printObjectsAsArray(){

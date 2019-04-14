@@ -15,7 +15,7 @@ class Mask {
         return new Mask(point);
     }
 
-    static Mask getNextMaskByUsingOldMask_and_StartPicture(Mask oldMask) throws EndOfPictureException {
+    static Mask getNextMaskByUsingOldMask_and_StartPicture(Mask oldMask) {
         Point currentA = oldMask.getA();
 
         if (currentA.getX() == StartPicture.MAX_X){
@@ -23,8 +23,6 @@ class Mask {
 
             currentA.setX(0);
             currentA.setY(currentA.getY()+1);
-
-            if (currentA.getY() > StartPicture.MAX_Y) throw new EndOfPictureException();
         }else {
             currentA = Point.createPointFromXY(currentA.getX()+1, currentA.getY());
         }
