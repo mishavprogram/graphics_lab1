@@ -90,7 +90,7 @@ class BigPictureTest {
         }
 
         int scaling = 2;
-        BigPictureImpl bigPicture = new BigPictureImpl(originImage, 3);
+        BigPictureImpl bigPicture = new BigPictureImpl(originImage, scaling);
         BufferedImage blackPicture = bigPicture.getBigBlackImage();
         ImageIO.write(blackPicture, "jpg", file);
     }

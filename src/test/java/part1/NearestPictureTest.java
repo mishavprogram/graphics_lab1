@@ -16,6 +16,7 @@ class NearestPictureTest {
 
     private static final String ORIGINAL_IMAGE_PATH = "src/main/resources/test/origin.jpg";
     private static final String BLACK_IMAGE_PATH = "src/main/resources/test/black.jpg";
+    private static final String NEAREST_IMAGE_PATH = "src/main/resources/test/nearest.jpg";
     private BufferedImage originImage;
 
     @BeforeEach
@@ -84,5 +85,20 @@ class NearestPictureTest {
         nearestPoints = nearestPicture.nearestOriginalPoints(point, nearestPicture.getBigBlackImage());
         nearest = nearestPicture.nearestPoint(point, nearestPoints);
         assertEquals(nearest, new Point(3,3));
+    }
+
+    @Test
+    void createNearestFile() throws IOException {
+        File file = new File(NEAREST_IMAGE_PATH);
+        if (file.exists()) {
+            file.delete();
+        }else{
+            //file.createNewFile();
+        }
+
+        int scaling = 3;
+        NearestPicture bigPicture = new NearestPicture(originImage, scaling);
+        BufferedImage nearestImage = bigPicture.getFinalImage();
+        ImageIO.write(nearestImage, "jpg", file);
     }
 }

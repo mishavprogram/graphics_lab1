@@ -12,13 +12,21 @@ public class NearestPicture extends BigPicture {
 
     public NearestPicture(BufferedImage originImage, int scaling) {
         super(originImage, scaling);
-        finalImage = new BufferedImage(originImage.getWidth(), originImage.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
+        finalImage = new BufferedImage(originImage.getWidth()*scaling, originImage.getHeight()*scaling, BufferedImage.TYPE_3BYTE_BGR);
         fillNearestPicture();
     }
 
     private void fillNearestPicture() {
         //проходить по всім точкам, і закрашує в колір найближчої оригінальної точки
-
+        for (int height=0; height<finalImage.getHeight(); height++){
+            for (int width=0; width<finalImage.getWidth(); width++){
+                Point goal = new Point(width, height);
+                List<Point> nearestPoints = nearestOriginalPoints(goal, super.getBigBlackImage());
+                Point forStealColor = nearestPoint(goal, nearestPoints);
+                //спростити
+                finalImage.setRGB(goal.x, goal.y, super.getBigBlackImage().getRGB(forStealColor.x, forStealColor.y));
+            }
+        }
     }
 
     /*
@@ -36,7 +44,7 @@ public class NearestPicture extends BigPicture {
             for (int width = point.x - scaling; width <= point.x + scaling; width++) {
 
                 Point toCompare = new Point(width, height);
-                
+
                 if (exist(toCompare, image)) {
 
                     int hash = BigPicture.hash(toCompare.x, toCompare.y);
@@ -70,5 +78,9 @@ public class NearestPicture extends BigPicture {
 
     public boolean exist(Point point, BufferedImage image) {
         return point.x >= 0 && point.y >= 0 && point.x <= image.getWidth() - 1 && point.y <= image.getHeight() - 1;
+    }
+
+    public BufferedImage getFinalImage() {
+        return finalImage;
     }
 }
