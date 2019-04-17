@@ -5,12 +5,10 @@ public class CountObjectsOnBinaryArray {
 
     private static Objects objects = Objects.createObjectsArrAndInfo();
 
-    static final boolean LOGGING = false;
-
     public static void main(String[] args) {
         //set first Mask
         Mask mask = Mask.createMaskOnlyWithA_FromPoint(Point.createPointFromXY(0, 0));
-        log(mask.toString());
+        Logger.log(mask.toString());
 
         movingABC_onPicture_AndDoLogic(mask);
 
@@ -36,11 +34,6 @@ public class CountObjectsOnBinaryArray {
 
     private static boolean notLastElementOfArray(int i, int j) {
         return !(i == StartPicture.MAX_Y && j == StartPicture.MAX_X);
-    }
-
-    static void log(String str){
-        if (LOGGING)
-        System.out.println(str);
     }
 
 }

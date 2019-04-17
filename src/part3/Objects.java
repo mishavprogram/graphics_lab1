@@ -1,6 +1,6 @@
 package part3;
 
-import static part3.CountObjectsOnBinaryArray.log;
+import static part3.Logger.log;
 
 class Objects {
     private int[][] arrOfObjects;

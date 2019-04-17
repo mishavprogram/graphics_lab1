@@ -44,7 +44,7 @@ class Mask {
             if (Point.exist(c, StartPicture.MAX_X, StartPicture.MAX_Y)){
                 nextMask.setC(c);
             }
-            CountObjectsOnBinaryArray.log(nextMask.toString());
+            Logger.log(nextMask.toString());
             return nextMask;
     }
 
