@@ -3,4 +3,4 @@ lab1Signals.iml
 out/
 **/resources/**
 **/pictures/**
-**/target/**
+target/**
