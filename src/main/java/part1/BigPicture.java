@@ -83,6 +83,10 @@ public abstract class BigPicture {
         return originPoints;
     }
 
+    public int getScaling() {
+        return scaling;
+    }
+
     public static int hash(int x, int y) {
         return x * 100_000_000 + y;
     }
