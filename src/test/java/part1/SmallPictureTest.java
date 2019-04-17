@@ -28,7 +28,7 @@ class SmallPictureTest {
 
         //ImageIO.write(input, "jpg", file);
 
-        int scaling = 1;
+        int scaling = 2;
         BufferedImage smallImage = SmallPicture.getSmallPictureWithScaling(input, scaling);
         ImageIO.write(smallImage, "jpg", file);
 
