@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Lab1_part1_and_2 {
 
-    public static final String ORIGINAL = "src/pictures/chan.jpg";
+    public static final String ORIGINAL = "src/pictures/origin.jpg";
     public static final String MINIMAL_SIZE = "src/pictures/minimal_size.jpg";
     public static final String TEST_BLACK_PICTURE = "src/pictures/TEST_BLACK_PICTURE.jpg";
     public static final String NEAREST = "src/pictures/nearest.jpg";
