@@ -2,6 +2,11 @@ package part3;
 
 import static part3.Logger.log;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 class Objects {
     private int[][] arrOfObjects;
 
@@ -24,12 +29,12 @@ class Objects {
     }
 
     public int getNumberOfObjects(){
-        int max = 0;
-        for (int i=1; i<=getNumber(); i++){
-            if (getAssoArr()[i]>max)
-                max = getAssoArr()[i];
-        }
-        return max;
+        Set<Integer> set = new HashSet<>();
+        Arrays.stream(assoArr).forEach(set::add);
+        set.remove(0);
+        log("objects : ");
+        set.forEach(e->log(e.toString()));
+        return set.size();
     }
 
     private Objects() {
@@ -65,7 +70,8 @@ class Objects {
             log("1. A NOT labeled");
         }else if (labeledA(mask) && !labeledB(mask) && !labeledC(mask)){
             number++;
-            assoArr[number] = number;
+            //assoArr[number] = number;
+            setValueInAsso(number, number);
             arrOfObjects[mask.getA().getY()][mask.getA().getX()] = number;
             log("2. A labeled");
         }else if (labeledB(mask) && labeledC(mask)){
@@ -79,10 +85,12 @@ class Objects {
                 setPointValueToOtherPointValue(mask.getA(), mask.getB());
                 if (valueFromArrOfObjects(mask.getB())>valueFromArrOfObjects(mask.getC())){
                     //тоді в асоц масиві для B поставити значення C
-                    assoArr[valueFromArrOfObjects(mask.getB())] = valueFromArrOfObjects(mask.getC());
+                    //assoArr[valueFromArrOfObjects(mask.getB())] = valueFromArrOfObjects(mask.getC());
+                    setValueInAsso(valueFromArrOfObjects(mask.getB()), valueFromArrOfObjects(mask.getC()));
                     log("3. B > C");
                 }else{
-                    assoArr[valueFromArrOfObjects(mask.getC())] = valueFromArrOfObjects(mask.getB());
+                    //assoArr[valueFromArrOfObjects(mask.getC())] = valueFromArrOfObjects(mask.getB());
+                    setValueInAsso(valueFromArrOfObjects(mask.getC()), valueFromArrOfObjects(mask.getB()));
                     log("3. C > B");
                 }
             }
@@ -94,6 +102,14 @@ class Objects {
             log("5. C labeled");
         }else{
             log("not detected!");
+        }
+    }
+
+    private void setValueInAsso(int place, int value){
+        if (assoArr[value]>0){
+            assoArr[place] = assoArr[value];
+        }else{
+            assoArr[place] = value;
         }
     }
 
