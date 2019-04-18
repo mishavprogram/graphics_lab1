@@ -23,8 +23,9 @@ public class NearestPicture extends BigPicture {
                 Point goal = new Point(width, height);
                 List<Point> nearestPoints = nearestOriginalPoints(goal, super.getBigBlackImage());
                 Point forStealColor = nearestPoint(goal, nearestPoints);
-                //спростити
-                finalImage.setRGB(goal.x, goal.y, super.getBigBlackImage().getRGB(forStealColor.x, forStealColor.y));
+
+                int color = getBigBlackImage().getRGB(forStealColor.x, forStealColor.y);
+                finalImage.setRGB(goal.x, goal.y, color);
             }
         }
     }
